@@ -75,7 +75,7 @@ def parse_args() -> None:
     else:
         modules.globals.fp_ui['face_enhancer'] = False
     
-    modules.globals.nsfw = False
+    # modules.globals.nsfw = False
 
     # translate deprecated args
     if args.source_path_deprecated:
@@ -172,10 +172,10 @@ def start() -> None:
             return
     # process image to image
     if has_image_extension(modules.globals.target_path):
-        if modules.globals.nsfw == False:
-            from modules.predicter import predict_image
-            if predict_image(modules.globals.target_path):
-                destroy()
+        # if modules.globals.nsfw == False:
+        #     from modules.predicter import predict_image
+        #     if predict_image(modules.globals.target_path):
+        #         destroy()
         shutil.copy2(modules.globals.target_path, modules.globals.output_path)
         for frame_processor in get_frame_processors_modules(modules.globals.frame_processors):
             update_status('Progressing...', frame_processor.NAME)
@@ -187,10 +187,10 @@ def start() -> None:
             update_status('Processing to image failed!')
         return
     # process image to videos
-    if modules.globals.nsfw == False:
-        from modules.predicter import predict_video
-        if predict_video(modules.globals.target_path):
-            destroy()
+    # if modules.globals.nsfw == False:
+    #     from modules.predicter import predict_video
+    #     if predict_video(modules.globals.target_path):
+    #         destroy()
     update_status('Creating temp resources...')
     create_temp(modules.globals.target_path)
     update_status('Extracting frames...')
